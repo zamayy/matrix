@@ -1,88 +1,74 @@
 import java.util.Random;
 
 public class Matrix {
-   int rand1;
-   int p;
-   int o;
-   int[][] a;
-   int[][] b;
+   int a;
+   int b;
+   int[][]m;
 
-    public void dostat(int p, int o){
-        this.p = p;
-        this.o = o;
-    }
+   public void set(int a, int b, int c){
+       m[a][b] = c;
+   }
+   public int get(int a,int b){
+       return m[a][b];
+   }
 
-    Random random = new Random(100);
-
-   public void sozdanie(int p, int o){
-       int a[][] = new int[p][o];{
-           for(int i = 0; i<a.length;i++) {
-               for(int j = 0; j<a[i].length; j++){
-                   rand1 = random.nextInt(100);
-                   a[i][j] = rand1;
-                   System.out.print(a[i][j]+" ");
-               }
-               System.out.println();
-           }
-       }
-       System.out.println();
-       int b[][] = new int[p][o];{
-           for(int i = 0; i<b.length;i++) {
-               for(int j = 0; j<b[i].length; j++){
-                   rand1 = random.nextInt(100);
-                   b[i][j] = rand1;
-                   System.out.print(b[i][j]+" ");
-               }
-               System.out.println();
+   public Matrix(int a, int b){
+       Random random = new Random();
+       m = new int[a][b];
+       for(int i=0;i<m.length;i++){
+           for(int j=0;j<m[i].length;j++){
+               set(i,j,random.nextInt(10));
            }
        }
        this.a = a;
        this.b = b;
    }
-    public void slozenie(int[][] a, int[][] b){
-        int c[][] = new int[p][o];{
-            for(int i = 0; i<c.length;i++) {
-                for(int j = 0; j<c[i].length; j++){
-                    c[i][j] = a[i][j] + b[i][j];
-                    System.out.print(c[i][j] + " ");
-                }
-                System.out.println();
-            }
-        }
-    }
-    int f = random.nextInt(10);
 
-    public void umnoznachislo(int[][]a,int f){
-        int d[][] = new int[p][o];{
-            for(int i = 0; i<d.length;i++){
-                for(int j = 0;j<d[i].length;j++){
-                    d[i][j] = a[i][j] * f;
-                    System.out.print(d[i][j]+" ");
-                }
-                System.out.println();
-            }
-        }
-    }
-    public void umnozmatrix(int[][]a, int[][]b){
-        int[][]m = new int[a.length][a[0].length];
-        int x = 0;
-        for(int i = 0;i<a.length || i< b.length; i++){
-            for(int j = 0;j<a[0].length || j< b[0].length; j++){
-                if(a.length<a[0].length){
-                    for(int k = 0; k<a.length; k++){
-                        x = x + (a[i][k] * b[k][j]);
-                    }
-                }
-                else {
-                    for(int k=0; k<a[p].length; k++){
-                        x = x + (a[i][k] * b[k][j]);
-                    }
-                }
-                m[i][j] = x;
-                x = 0;
-                System.out.println(m[i][j] + " ");
-            }
-            System.out.println();
-        }
-    }
+   public void output(){
+       for (int i=0;i<m.length;i++){
+           for(int j=0;j<m[i].length;j++){
+               System.out.print(get(i,j)+" ");
+           }
+           System.out.println();
+       }
+   }
+   Matrix mplus(Matrix m){
+       Matrix matr = new Matrix(m.a,m.b);
+       for(int i=0;i<m.a;i++){
+           for(int j=0;j<m.b;j++){
+               matr.set(i,j,get(i,j)+m.get(i,j));
+           }
+       }
+       return matr;
+   }
+   Matrix umnoznachislo(int t){
+       Matrix matr = new Matrix(a,b);
+       for(int i=0;i<m.length;i++){
+           for(int j=0;j<m[i].length;j++){
+               matr.set(i,j,get(i,j)*t);
+           }
+       }
+       return matr;
+   }
+   Matrix umnozmatrix(Matrix m){
+       Matrix matr = new Matrix(a,b);
+       int q = 0;
+       for(int i=0;i<matr.a;i++){
+           for(int j=0;j<matr.b;j++){
+               if(matr.a<matr.b){
+                   for(int p=0;p<matr.a;p++){
+                       q = q + get(i,p)*matr.get(p,j);
+                   }
+               }
+               else {
+                   for(int p=0;p<matr.b;p++){
+                       q = q + (get(i,p)*matr.get(p,j));
+                   }
+               }
+               matr.set(i,j,q);
+               q=0;
+           }
+       }
+       return matr;
+   }
 }

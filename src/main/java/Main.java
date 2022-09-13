@@ -1,17 +1,22 @@
 public class Main {
     public static void main(String[] args) {
-        Matrix matrix = new Matrix();
-        matrix.dostat(3,4);
-        System.out.println("Заданные матрицы:");
-        matrix.sozdanie(matrix.p, matrix.o);
+        Matrix matrix1 = new Matrix(3,3);
+        Matrix matrix2 = new Matrix(3,3);
+        Matrix matrix3 = new Matrix(3,3);
+        Matrix matrix4 = new Matrix(3,3);
+        Matrix matrix5 = new Matrix(3,3);
+        matrix1.output();
         System.out.println();
-        System.out.println("Сложанная матрица:");
-        matrix.slozenie(matrix.a, matrix.b);
+        matrix2.output();
         System.out.println();
-        System.out.println("Умноженная на число матрица:");
-        matrix.umnoznachislo(matrix.a, matrix.f);
+        matrix3 = matrix1.mplus(matrix2);
+        matrix3.output();
         System.out.println();
-        System.out.println("Перемноженные матрицы:");
-        matrix.umnozmatrix(matrix.a, matrix.b);
+        matrix4 = matrix1.umnoznachislo(2);
+        matrix4.output();
+        System.out.println();
+        matrix5 = matrix1.umnozmatrix(matrix2);
+        matrix5.output();
+        
     }
 }
